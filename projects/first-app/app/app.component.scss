@@ -1,0 +1,66 @@
+:host {
+
+  .simple, .array {
+    height: 16px;
+    margin-bottom: 15px;
+    font: 17px Arial, serif;
+  }
+
+  .array {
+    i {
+      margin-right: 5px;
+    }
+  }
+
+  .color, .mouseEvents, .mouseEvents > div {
+    display: flex;
+    align-items: center;
+  }
+
+  .color {
+    height: 110px;
+    margin-bottom: 20px;
+
+    & > div {
+      width: 100px;
+      height: 100px;
+      margin-right: 10px;
+      transition: background-color .8s;
+    }
+  }
+
+  .mouseEvents {
+    & > button {
+      width: 120px;
+      height: 40px;
+      margin-right: 20px;
+      font: 16px Arial;
+      background: #a8b0ff;
+      color: #fff;
+      text-transform: uppercase;
+      box-shadow: 0 0 0 1px #1e00ff;
+      transition: box-shadow .3s;
+
+      &:hover {
+        box-shadow: 0 0 6px 1px #1e00ff;
+        cursor: pointer;
+      }
+    }
+
+    & > div {
+      justify-content: center;
+      width: 70px;
+      height: 30px;
+      font: 16px Arial, serif;
+      transition: background-color .3s;
+
+      &.active {
+        background-color: #32cd32;
+      }
+
+      &.inactive {
+        background-color: #f00;
+      }
+    }
+  }
+}

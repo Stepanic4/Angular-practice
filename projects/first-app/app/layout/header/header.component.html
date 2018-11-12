@@ -1,0 +1,13 @@
+<div class="block mb-0">
+  <h3>Header</h3>
+
+  <button class="btn btn-alt-danger" (click)="toggle($event)">
+    Toggle
+  </button>
+
+  <div class="d-flex justify-content-between content" [class.flex-column]="column">
+    <div class="h4" *ngFor="let item of menuItems">
+      {{item}}
+    </div>
+  </div>
+</div>
