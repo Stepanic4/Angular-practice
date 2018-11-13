@@ -7,6 +7,7 @@ import {CommonModule} from '@angular/common';
 import {CheckboxComponent} from '../elements/checkbox/checkbox.component';
 import {SelectComponent} from '../elements/select/select.component';
 import {RadioComponent} from '../elements/radio/radio.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,9 @@ import {RadioComponent} from '../elements/radio/radio.component';
     RadioComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     ContentComponent,
