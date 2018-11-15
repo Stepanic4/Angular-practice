@@ -1,0 +1,50 @@
+<div class="wrapper w-100 h-100 d-flex flex-column">
+  <div class="content pb-20 mb-0 block d-flex justify-content-around text-uppercase font-w600">
+    <a
+      class="link-effect"
+      [routerLink]="'/'"
+      [routerLinkActive]="'text-success'"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >Main Page</a>
+    <a
+      class="link-effect"
+      [routerLink]="'/level1'"
+      [routerLinkActive]="'text-success'"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >Level 1</a>
+    <a
+      class="link-effect"
+      [routerLink]="'/level1/level2'"
+      [routerLinkActive]="'text-success'"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >Level 2</a>
+    <a
+      class="link-effect"
+      [routerLink]="'/level1/level2/level3'"
+      [routerLinkActive]="'text-success'"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >Level 3</a>
+    <a
+      class="link-effect"
+      [routerLink]="'/level1/level2/level3/someID'"
+      [routerLinkActive]="'text-success'"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >Level 3 with param</a>
+    <a
+      class="link-effect"
+      [routerLink]="'/about-us'"
+      [routerLinkActive]="'text-success'"
+    >About Us</a>
+  </div>
+  <section class="d-flex justify-content-between h-50 pt-0">
+
+    <app-aside class="my-20 px-20 d-flex justify-content-center align-items-center"></app-aside>
+
+    <main class="w-100 block m-20">
+      <app-content></app-content>
+    </main>
+  </section>
+
+  <app-footer></app-footer>
+
+</div>
