@@ -12,6 +12,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ROUTES } from '../common/const/routes.const';
+import { HttpClientModule } from '@angular/common/http';
 import { AsideComponent } from './layout/aside/aside.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { ContentComponent } from './layout/content/content.component';
@@ -43,6 +44,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     RouterModule.forRoot(ROUTES)
   ],
   providers: [],

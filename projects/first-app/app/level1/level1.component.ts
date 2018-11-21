@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-level1',
@@ -6,4 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: [ './level1.component.scss' ]
 })
 
-export class Level1Component {}
+export class Level1Component implements OnInit {
+
+
+
+  public ngOnInit() {
+
+  }
+}

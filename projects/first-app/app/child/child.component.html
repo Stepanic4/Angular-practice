@@ -5,10 +5,12 @@
     class="w-100 mt-1"
     type="text"
     placeholder="New Param Value"
-    #userNameInput
-  >
+    #userNameInput>
   <button
     class="w-100 mt-1"
-    (click)="changeParamValue(userNameInput.value); userNameInput.value = ''"
-  >Set New Value</button>
+    (click)="changeParamValue(userNameInput.value); userNameInput.value = ''">
+    Set New Value
+  </button>
+
+  <app-checkbox></app-checkbox>
 </div>

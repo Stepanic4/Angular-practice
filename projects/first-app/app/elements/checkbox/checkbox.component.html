@@ -2,7 +2,9 @@
 
 
   <label class="css-control css-control-primary css-checkbox">
-    <input type="checkbox" class="css-control-input" checked="">
-    <span class="css-control-indicator"></span> Box
+    <input type="checkbox" class="css-control-input" [(ngModel)]="isChecked" (change)="checkValue(isChecked? 'true':'false')">
+    <span class="css-control-indicator"></span> Box {{isChecked}}
   </label>
+
+
 
