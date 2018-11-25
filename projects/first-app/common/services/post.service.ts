@@ -25,4 +25,14 @@ export class PostService {
       );
     });
   }
+
+  public getPost(id: string): Observable<PostModel> {
+    return Observable.create((observer: Observer<PostModel>): void => {
+      this.http.get<KeyValueInterface<any>>(`https://jsonplaceholder.typicode.com/posts/${id}`).subscribe(
+        (data: KeyValueInterface<any>): void => observer.next(PostHelper.createPostModelFromServerData(data)),
+        (error: HttpErrorResponse): void => console.error(error),
+        (): void => observer.complete()
+      );
+    });
+  }
 }

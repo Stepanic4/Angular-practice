@@ -1,15 +1,21 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Subject } from 'rxjs/internal/Subject';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { Observable } from 'rxjs/internal/Observable';
+import { Observer } from 'rxjs/internal/types';
 import { UserHelper } from '../helpers/user.helper';
+import { KeyValueInterface } from '../interfaces/key-value.interface';
 import { UserModel } from '../models/user.model';
 
 @Injectable({ providedIn: 'root' })
 
 export class UserService {
   /**
-   * Property to subscribe from any other entity: component, service, etc
-   * @type { EventEmitter<UserModel> }
+   * Subject for subscribe from the outside
+   * @type { Subject<UserModel> }
    */
-  public onUserChange: EventEmitter<UserModel> = new EventEmitter<UserModel>();
+  public userSubject: Subject<UserModel> = new Subject<UserModel>();
 
   /**
    * Saved copy of user model. Won't be available from the outside.
@@ -17,12 +23,32 @@ export class UserService {
    */
   private user: UserModel;
 
-  constructor() {
-    // Fake user model "downloading"
-    this.getUser()
-      .then((user: UserModel): void => {
-        this.sendNewUserToSubscribers(user);
-      });
+  /**
+   * Behavior subject for user property
+   * @type { BehaviorSubject<UserModel> }
+   */
+  private userBS: BehaviorSubject<UserModel> = new BehaviorSubject<UserModel>(this.user);
+
+  constructor(private http: HttpClient) {}
+
+  /**
+   * Method emits the download process of user model from the server
+   * @returns { Promise<UserModel> }
+   * @async
+   */
+  public getUsers(): Observable<UserModel[]> {
+    return Observable.create((observer: Observer<UserModel[]>): void => {
+      this.http.get<KeyValueInterface<any>[]>('https://jsonplaceholder.typicode.com/users').subscribe(
+        (data: KeyValueInterface<any>[]): void => {
+          const users: UserModel[] = data.map<UserModel>(
+            (u: KeyValueInterface<any>): UserModel => UserHelper.createUserModel(u)
+          );
+          observer.next(users);
+        },
+        (error: HttpErrorResponse): void => observer.error(error),
+        (): void => observer.complete()
+      );
+    });
   }
 
   /**
@@ -30,45 +56,22 @@ export class UserService {
    * @returns { Promise<UserModel> }
    * @async
    */
-  public async getUser(): Promise<UserModel> {
-    return new Promise<UserModel>((resolve: Function): void => {
-      setTimeout(
-        (): void => {
-          resolve(new UserModel({
-            id: 'someID',
-            name: 'User#1',
-            externalAccounts: []
-          }));
-        },
-        4000
+  public getUser(id: string): Observable<UserModel> {
+    return Observable.create((observer: Observer<UserModel>): void => {
+      this.http.get<KeyValueInterface<any>>(`https://jsonplaceholder.typicode.com/users${id}`).subscribe(
+        (data: KeyValueInterface<any>): void => observer.next(UserHelper.createUserModel(data)),
+        (error: HttpErrorResponse): void => observer.error(error),
+        (): void => observer.complete()
       );
     });
   }
 
   /**
-   * Method that any other entity (component, service, etc) should use when they want to change existing user model
-   * Method will be async to emit the sending (to the server) process to save the new model
-   * @param changedUserModel { UserModel }
-   * @returns { Promise<UserModel> }
-   * @async
+   * Test method to change saved user model and send new model to subscribers
+   * @param user { UserModel }
    */
-  public async changeUser(changedUserModel: UserModel): Promise<UserModel> {
-    return new Promise<UserModel>((resolve: Function, reject: Function): void => {
-      if (changedUserModel.id !== this.user.id || changedUserModel.name !== this.user.name) {
-        setTimeout(// Timer makes logic async to emit the HTTP request
-          (): void => {
-            // Removing reference from the entity that gave model in the changedUserModel param
-            // Then calling the method that saves new model and notifies EventEmitter subscribers
-            const newUser: UserModel = UserHelper.cloneUserModel(changedUserModel);
-            resolve(newUser);
-            this.sendNewUserToSubscribers(newUser);
-          },
-          3000
-        );
-      } else {
-        reject(new Error('Models are equal'));
-      }
-    });
+  public dispatch(user: UserModel): void {
+    this.sendNewUserToSubscribers(user);
   }
 
   /**
@@ -78,7 +81,13 @@ export class UserService {
    * @returns { void }
    */
   private sendNewUserToSubscribers(user: UserModel): void {
+    // Saving new value
     this.user = user;
-    this.onUserChange.emit(user);
+
+    // Sending update to subscribers via BehaviorSubject
+    this.userBS.next(this.user);
+
+    // Sending update to subscribers via Subject
+    this.userSubject.next(this.user);
   }
 }
