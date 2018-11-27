@@ -1,5 +1,21 @@
-<div class="wrapper d-flex flex-column justify-content-end align-items-start w-50 mr-auto ml-auto">
-  <h1>404</h1>
-  <p>Oups... Page not found :(</p>
-  <p><a [routerLink]="'/'">Main Page</a></p>
+
+<div id="page-container" class="main-content-boxed side-trans-enabled">
+  <main id="main-container">
+    <div class="hero bg-white">
+      <div class="hero-inner">
+        <div class="content content-full">
+          <div class="py-30 text-center">
+            <div class="display-3 text-danger">
+              <i class="fa fa-warning"></i> 404
+            </div>
+            <h1 class="h2 font-w700 mt-30 mb-10">Oops.. You just found an error page..</h1>
+            <h2 class="h3 font-w400 text-muted mb-50">We are sorry but the page you are looking for was not found..</h2>
+            <a class="btn btn-hero btn-noborder btn-alt-secondary" [routerLink]="'/'">
+              <i class="fa fa-arrow-left mr-10"></i> Back to Main Page
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
 </div>

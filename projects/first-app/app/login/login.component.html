@@ -1,0 +1,74 @@
+<div id="page-container" class="main-content-boxed side-trans-enabled">
+  <main id="main-container">
+
+    <div class="bg-video my-video" data-vide-bg="assets/media/videos/city_night" data-vide-options="posterType: jpg"
+         style="position: relative;">
+      <div
+        style="position: absolute; z-index: -1; top: 0; left: 0; bottom: 0; right: 0; overflow: hidden; background-size: cover; background-color: transparent; background-repeat: no-repeat; background-position: 50% 50%; background-image: none;">
+        <video autoplay="" loop="" muted=""
+               style="margin: auto; position: absolute; z-index: -1; top: 50%; left: 50%; transform: translate(-50%, -50%); visibility: visible; opacity: 1; width: auto; height: auto;min-width: 100%;
+  min-height: 100%;">
+          <source src="assets/media/videos/winter-1080.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="bg-black-op">
+        <div class="hero-static content content-full bg-white js-appear-enabled animated fadeIn" data-toggle="appear">
+          <div class="py-30 px-5 text-center">
+            <a class="link-effect font-w700" href="https://github.com/Stepanic4">
+              <i class="fa fa-github fa-2x mr-5"></i>
+              <span class="font-size-xl text-primary-dark">angular</span><span class="font-size-xl">work</span>
+            </a>
+            <h1 class="h2 font-w700 mt-50 mb-10">Welcome to Your Dashboard</h1>
+            <h2 class="h4 font-w400 text-muted mb-0">Please sign in</h2>
+          </div>
+          <div class="row justify-content-center px-5">
+            <div class="col-sm-8 col-md-6 col-xl-4">
+              <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="" action="" method="post" novalidate="novalidate">
+                <div class="form-group row">
+                  <div class="col-12">
+                    <div class="form-material floating" [class.open]="profileForm.get('username')?.dirty">
+                      <input type="text" class="form-control" id="login-username" formControlName="username">
+                      <label for="login-username">Username</label>
+                    </div>
+                    <div *ngIf="(profileForm.get('username').dirty) && profileForm.get('username').invalid" class="text-danger">
+                      Email no valid
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-12">
+                    <div class="form-material floating" [class.open]="profileForm.get('password')?.hasError('minlength')">
+                      <input type="password" class="form-control" id="login-password" formControlName="password">
+                      <label for="login-password">Password</label>
+                    </div>
+                    <div *ngIf="profileForm.get('password').hasError('minlength')" class="text-danger">
+                      Min length 8
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row gutters-tiny">
+                  <div class="col-12 mb-10">
+                    <button [disabled]="!profileForm.valid" type="submit" class="btn btn-block btn-hero btn-noborder btn-rounded btn-alt-primary">
+                      <i class="si si-login mr-10"></i> Sign In
+                    </button>
+                  </div>
+                  <div class="col-sm-6 mb-5">
+                    <a class="btn btn-block btn-noborder btn-rounded btn-alt-secondary">
+                      <i class="fa fa-plus text-muted mr-5"></i> New Account
+                    </a>
+                  </div>
+                  <div class="col-sm-6 mb-5">
+                    <a class="btn btn-block btn-noborder btn-rounded btn-alt-secondary">
+                      <i class="fa fa-warning text-muted mr-5"></i> Forgot password
+                    </a>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

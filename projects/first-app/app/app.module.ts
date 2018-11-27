@@ -20,6 +20,7 @@ import { SelectComponent } from './elements/select/select.component';
 import { RadioComponent } from './elements/radio/radio.component';
 import { CheckboxComponent } from './elements/checkbox/checkbox.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ContentComponent,
     CheckboxComponent,
     SelectComponent,
-    RadioComponent
+    RadioComponent,
+    LoginComponent
   ],
   imports: [
     NgbModule,

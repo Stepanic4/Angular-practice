@@ -6,6 +6,7 @@ import { Level2Component } from '../../app/level2/level2.component';
 import { Level3Component } from '../../app/level3/level3.component';
 import { AboutUsComponent } from '../../app/about-us/about-us.component';
 import { MainPageComponent } from '../../app/main-page/main-page.component';
+import {LoginComponent} from '../../app/login/login.component';
 
 export const ROUTES: Routes = [
   {
@@ -43,6 +44,10 @@ export const ROUTES: Routes = [
         component: AboutUsComponent
       }
     ]
+  },
+  {
+    path: 'sign-in',
+    component: LoginComponent
   },
   { path: '**', component: NotFoundComponent }
 ];
