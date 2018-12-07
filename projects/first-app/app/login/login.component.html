@@ -1,16 +1,7 @@
 <div id="page-container" class="main-content-boxed side-trans-enabled">
   <main id="main-container">
 
-    <div class="bg-video my-video" data-vide-bg="assets/media/videos/city_night" data-vide-options="posterType: jpg"
-         style="position: relative;">
-      <div
-        style="position: absolute; z-index: -1; top: 0; left: 0; bottom: 0; right: 0; overflow: hidden; background-size: cover; background-color: transparent; background-repeat: no-repeat; background-position: 50% 50%; background-image: none;">
-        <video autoplay="" loop="" muted=""
-               style="margin: auto; position: absolute; z-index: -1; top: 50%; left: 50%; transform: translate(-50%, -50%); visibility: visible; opacity: 1; width: auto; height: auto;min-width: 100%;
-  min-height: 100%;">
-          <source src="assets/media/videos/winter-1080.mp4" type="video/mp4">
-        </video>
-      </div>
+    <div class="bg-primary-lighter">
 
       <div class="bg-black-op">
         <div class="hero-static content content-full bg-white js-appear-enabled animated fadeIn" data-toggle="appear">
@@ -31,6 +22,9 @@
                       <input type="text" class="form-control" id="login-username" formControlName="username">
                       <label for="login-username">Username</label>
                     </div>
+                    <!--=======-->
+                    
+                    <!--=======-->
                     <div *ngIf="(profileForm.get('username').dirty) && profileForm.get('username').invalid" class="text-danger">
                       Email no valid
                     </div>

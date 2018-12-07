@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HighlightDirective } from '../common/directives/highlight.directive';
 import { AppComponent } from './app.component';
 import { BaseComponent } from './base/base.component';
 import { ChildComponent } from './child/child.component';
@@ -20,6 +21,7 @@ import { SelectComponent } from './elements/select/select.component';
 import { RadioComponent } from './elements/radio/radio.component';
 import { CheckboxComponent } from './elements/checkbox/checkbox.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MapKeysPipe } from '../common/pipes/map-keys.pipe';
 import { LoginComponent } from './login/login.component';
 
 @NgModule({
@@ -33,6 +35,8 @@ import { LoginComponent } from './login/login.component';
     AboutUsComponent,
     MainPageComponent,
     NotFoundComponent,
+    HighlightDirective,
+    MapKeysPipe,
     AsideComponent,
     FooterComponent,
     ContentComponent,
@@ -43,10 +47,10 @@ import { LoginComponent } from './login/login.component';
   ],
   imports: [
     NgbModule,
-    BrowserModule,
     FormsModule,
-    ReactiveFormsModule,
+    BrowserModule,
     HttpClientModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(ROUTES)
   ],
   providers: [],
