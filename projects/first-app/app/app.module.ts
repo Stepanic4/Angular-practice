@@ -22,7 +22,8 @@ import { RadioComponent } from './elements/radio/radio.component';
 import { CheckboxComponent } from './elements/checkbox/checkbox.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MapKeysPipe } from '../common/pipes/map-keys.pipe';
-import { LoginComponent } from './login/login.component';
+import { SignInComponent } from './login/sign-in/sign-in.component';
+import { CreateAccountComponent } from './login/create-account/create-account.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { LoginComponent } from './login/login.component';
     CheckboxComponent,
     SelectComponent,
     RadioComponent,
-    LoginComponent
+    SignInComponent,
+    CreateAccountComponent
   ],
   imports: [
     NgbModule,

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "spalah-angular-app": {
+    "My-angular-app": {
       "root": "",
       "sourceRoot": "projects/first-app",
       "projectType": "application",
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/spalah-angular-app",
+            "outputPath": "dist/My-angular-app",
             "index": "projects/first-app/index.html",
             "main": "projects/first-app/main.ts",
             "polyfills": "projects/first-app/polyfills.ts",
@@ -61,18 +61,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "spalah-angular-app:build"
+            "browserTarget": "My-angular-app:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "spalah-angular-app:build:production"
+              "browserTarget": "My-angular-app:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "spalah-angular-app:build"
+            "browserTarget": "My-angular-app:build"
           }
         },
         "test": {
@@ -106,7 +106,7 @@
         }
       }
     },
-    "spalah-angular-app-e2e": {
+    "My-angular-app-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -115,11 +115,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "spalah-angular-app:serve"
+            "devServerTarget": "My-angular-app:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "spalah-angular-app:serve:production"
+              "devServerTarget": "My-angular-app:serve:production"
             }
           }
         },
@@ -135,5 +135,5 @@
       }
     }
   },
-  "defaultProject": "spalah-angular-app"
+  "defaultProject": "My-angular-app"
 }

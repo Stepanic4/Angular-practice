@@ -2,18 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-sign-in',
+  templateUrl: './sign-in.component.html',
+  styleUrls: ['./sign-in.component.scss']
 })
 
-export class LoginComponent implements OnInit {
+export class SignInComponent implements OnInit {
 
   public profileForm = new FormGroup({
 
-    username: new FormControl('', [
+    useremail: new FormControl('', [
       Validators.required,
-      Validators.pattern('^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$'),
+      Validators.pattern('^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,5})+$'),
       Validators.minLength(5),
       Validators.maxLength(100)
     ]),
@@ -21,8 +21,7 @@ export class LoginComponent implements OnInit {
       Validators.required,
       Validators.minLength(8),
       Validators.maxLength(25),
-    ]),
-    terms: new FormControl(false, Validators.required)
+    ])
   });
 
   constructor() { }

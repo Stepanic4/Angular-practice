@@ -1,8 +1,6 @@
 <div id="page-container" class="main-content-boxed side-trans-enabled">
   <main id="main-container">
-
-    <div class="bg-primary-lighter">
-
+    <div class="snow">
       <div class="bg-black-op">
         <div class="hero-static content content-full bg-white js-appear-enabled animated fadeIn" data-toggle="appear">
           <div class="py-30 px-5 text-center">
@@ -15,40 +13,48 @@
           </div>
           <div class="row justify-content-center px-5">
             <div class="col-sm-8 col-md-6 col-xl-4">
-              <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="" action="" method="post" novalidate="novalidate">
-                <div class="form-group row">
+              <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="" action="" method="post"
+                    novalidate="novalidate">
+                <div class="form-group row" [class.is-invalid]="profileForm.get('useremail')?.hasError('pattern')">
                   <div class="col-12">
-                    <div class="form-material floating" [class.open]="profileForm.get('username')?.dirty">
-                      <input type="text" class="form-control" id="login-username" formControlName="username">
-                      <label for="login-username">Username</label>
+                    <div class="form-material floating"
+                         [class.open]="profileForm.get('useremail')?.hasError('pattern') || profileForm.get('useremail')?.valid">
+                      <input type="email" class="form-control" id="login-useremail" formControlName="useremail">
+                      <label for="login-useremail">Username</label>
                     </div>
-                    <!--=======-->
-                    
-                    <!--=======-->
-                    <div *ngIf="(profileForm.get('username').dirty) && profileForm.get('username').invalid" class="text-danger">
+                    <div *ngIf="profileForm.get('useremail')?.hasError('pattern')"
+                         class="text-danger animated fadeInDown">
                       Email no valid
                     </div>
                   </div>
                 </div>
-                <div class="form-group row">
+                <div class="form-group row"
+                     [class.is-invalid]="profileForm.get('password')?.hasError('minlength') || profileForm.get('password')?.hasError('maxlength')">
                   <div class="col-12">
-                    <div class="form-material floating" [class.open]="profileForm.get('password')?.hasError('minlength')">
+                    <div class="form-material floating"
+                         [class.open]="profileForm.get('password')?.hasError('minlength') || profileForm.get('password')?.hasError('maxlength') || profileForm.get('password')?.valid">
                       <input type="password" class="form-control" id="login-password" formControlName="password">
                       <label for="login-password">Password</label>
                     </div>
-                    <div *ngIf="profileForm.get('password').hasError('minlength')" class="text-danger">
+                    <div *ngIf="profileForm.get('password').hasError('minlength')"
+                         class="text-danger animated fadeInDown">
                       Min length 8
+                    </div>
+                    <div *ngIf="profileForm.get('password').hasError('maxlength')"
+                         class="text-danger animated fadeInDown">
+                      Max length 25
                     </div>
                   </div>
                 </div>
                 <div class="form-group row gutters-tiny">
                   <div class="col-12 mb-10">
-                    <button [disabled]="!profileForm.valid" type="submit" class="btn btn-block btn-hero btn-noborder btn-rounded btn-alt-primary">
+                    <button [disabled]="!profileForm.valid" type="submit" [routerLink]="'/'"
+                            class="btn btn-block btn-hero btn-noborder btn-rounded btn-alt-primary">
                       <i class="si si-login mr-10"></i> Sign In
                     </button>
                   </div>
                   <div class="col-sm-6 mb-5">
-                    <a class="btn btn-block btn-noborder btn-rounded btn-alt-secondary">
+                    <a class="btn btn-block btn-noborder btn-rounded btn-alt-secondary" [routerLink]="'/create-account'">
                       <i class="fa fa-plus text-muted mr-5"></i> New Account
                     </a>
                   </div>
