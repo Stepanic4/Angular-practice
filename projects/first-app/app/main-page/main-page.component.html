@@ -1,7 +1,7 @@
 <div class="content">
   <div class="block-content pb-50">
     <h1>
-      Some content for the main page
+      This main page
     </h1>
 
     <div class="row">
@@ -15,5 +15,9 @@
         <app-select></app-select>
       </div>
     </div>
+    <div class="row">
+      <div class="col-12 pt-50 h4">Today is <span class="text-primary">{{ time | async | date: 'EEEE dd MMMM yyyy, HH:mm:ss'}}</span></div>
+    </div>
   </div>
 </div>
+
