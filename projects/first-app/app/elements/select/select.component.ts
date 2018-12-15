@@ -17,7 +17,7 @@ export class SelectComponent implements OnInit {
   ];
 
   public form = new FormGroup({
-    state: new FormControl(this.states[3]),
+    state: new FormControl(this.states[2]),
   });
 
   constructor() { }

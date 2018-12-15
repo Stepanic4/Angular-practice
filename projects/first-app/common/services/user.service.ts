@@ -38,7 +38,12 @@ export class UserService {
    */
   public getUsers(): Observable<UserModel[]> {
     return Observable.create((observer: Observer<UserModel[]>): void => {
-      this.http.get<KeyValueInterface<any>[]>('https://jsonplaceholder.typicode.com/users').subscribe(
+      this.http.get<KeyValueInterface<any>[]>('https://jsonplaceholder.typicode.com/users', {
+        headers: {
+          'Content-type': 'multipart/form-data',
+          'Accept': 'text/html'
+        }
+      }).subscribe(
         (data: KeyValueInterface<any>[]): void => {
           const users: UserModel[] = data.map<UserModel>(
             (u: KeyValueInterface<any>): UserModel => UserHelper.createUserModel(u)
@@ -58,7 +63,7 @@ export class UserService {
    */
   public getUser(id: string): Observable<UserModel> {
     return Observable.create((observer: Observer<UserModel>): void => {
-      this.http.get<KeyValueInterface<any>>(`https://jsonplaceholder.typicode.com/users${id}`).subscribe(
+      this.http.get<KeyValueInterface<any> >(`https://jsonplaceholder.typicode.com/users${id}`).subscribe(
         (data: KeyValueInterface<any>): void => observer.next(UserHelper.createUserModel(data)),
         (error: HttpErrorResponse): void => observer.error(error),
         (): void => observer.complete()

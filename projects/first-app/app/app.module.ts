@@ -25,6 +25,7 @@ import { MapKeysPipe } from '../common/pipes/map-keys.pipe';
 import { SignInComponent } from './login/sign-in/sign-in.component';
 import { CreateAccountComponent } from './login/create-account/create-account.component';
 import {ClockService} from '../common/services/clock.service';
+import { ForgotPasswordComponent } from './login/forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import {ClockService} from '../common/services/clock.service';
     SelectComponent,
     RadioComponent,
     SignInComponent,
-    CreateAccountComponent
+    CreateAccountComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     NgbModule,
