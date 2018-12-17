@@ -14,6 +14,8 @@ export class UserHelper {
       name: parsed.name,
       email: parsed.email,
       username: parsed.username,
+      street: parsed.address.street,
+      suite: parsed.address.suite,
       externalAccounts: (
         !!parsed.externalAccounts && parsed.externalAccounts instanceof Array
           ? parsed.externalAccounts.map(UserHelper.createExternalAccountModel)
@@ -33,7 +35,9 @@ export class UserHelper {
       serverName: parsed.serverName,
       name: parsed.name,
       email: parsed.email,
-      username: parsed.username
+      username: parsed.username,
+      street: parsed.street,
+      suite: parsed.suite
     });
   }
 
@@ -48,6 +52,8 @@ export class UserHelper {
       name: model.name,
       email: model.email,
       username: model.username,
+      street: model.street,
+      suite: model.suite,
       externalAccounts: model.externalAccounts.map<ExternalAccountModel>(
         (m: ExternalAccountModel): ExternalAccountModel => {
           return UserHelper.cloneExternalAccountModel(m);
@@ -67,7 +73,9 @@ export class UserHelper {
       name: model.name,
       serverName: model.serverName,
       email: model.email,
-      username: model.username
+      username: model.username,
+      street: model.street,
+      suite: model.suite
     });
   }
 }

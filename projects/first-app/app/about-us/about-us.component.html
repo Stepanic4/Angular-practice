@@ -14,15 +14,18 @@
           <th>Name</th>
           <th class="d-none d-sm-table-cell">Last name</th>
           <th>Email</th>
+          <th>Address</th>
+          <th class="text-right">Change</th>
         </tr>
         </thead>
-        <tbody  *ngFor="let list of myUsers">
+        <tbody  *ngFor="let list of myUsers; index as i">
         <tr>
           <th class="text-center" scope="row">{{list.id}}</th>
           <td>{{list.username}}</td>
           <td class="d-none d-sm-table-cell">{{list.name}}</td>
           <td class="d-none d-sm-table-cell">{{list.email}}</td>
-          <td class="text-center">
+          <td class="d-none d-sm-table-cell">{{list.street}}.&nbsp;{{list.suite}}</td>
+          <td class="text-right">
             <div class="btn-group">
               <button type="button" class="btn btn-sm btn-secondary">
                 <i class="fa fa-pencil"></i>

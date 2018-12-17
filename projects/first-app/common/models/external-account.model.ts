@@ -5,7 +5,9 @@ export class ExternalAccountModel implements ExternalAccountInterface {
   public serverName: string;
   public name: string;
   public email: string;
-  public  username: string;
+  public username: string;
+  public street: string;
+  public suite: string;
 
   constructor(params: ExternalAccountInterface = {} as ExternalAccountInterface) {
     this.id = params.id;
@@ -13,5 +15,7 @@ export class ExternalAccountModel implements ExternalAccountInterface {
     this.name = params.name;
     this.email = params.email;
     this.username = params.username;
+    this.street = params.street;
+    this.suite = params.suite;
   }
 }

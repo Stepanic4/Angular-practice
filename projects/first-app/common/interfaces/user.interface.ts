@@ -5,5 +5,7 @@ export interface UserInterface {
   name: string;
   email: string;
   username: string;
+  street: string;
+  suite: string;
   externalAccounts: ExternalAccountModel[];
 }

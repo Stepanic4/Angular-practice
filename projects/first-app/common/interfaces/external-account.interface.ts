@@ -4,4 +4,6 @@ export interface ExternalAccountInterface {
   name: string;
   email: string;
   username: string;
+  street: string;
+  suite: string;
 }

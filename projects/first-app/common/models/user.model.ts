@@ -6,6 +6,8 @@ export class UserModel implements UserInterface {
   public name: string;
   public email: string;
   public username: string;
+  public street: string;
+  public suite: string;
   public externalAccounts: ExternalAccountModel[];
 
   constructor(params: UserInterface = {} as UserInterface) {
@@ -13,6 +15,8 @@ export class UserModel implements UserInterface {
     this.name = params.name;
     this.email = params.email;
     this.username = params.username;
+    this.street = params.street;
+    this.suite = params.suite;
     this.externalAccounts = params.externalAccounts;
   }
 }
