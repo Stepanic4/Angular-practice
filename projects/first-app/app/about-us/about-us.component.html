@@ -1,11 +1,43 @@
 <div class="content">
-  <h1>About Us</h1>
-  <p>Some random text.</p>
-  <h2>Send feedback</h2>
-  <div class="row">
-    <div class="col-12">
-      <span class="text-primary" *ngFor="let uu of myUsers">{{uu.name}}</span>
+  <h1>About Us Component</h1>
+
+
+  <div class="block">
+    <div class="block-header block-header-default justify-content-center">
+      <h4 class="mb-0">Users list</h4>
+    </div>
+    <div class="block-content">
+      <table class="table table-hover table-vcenter">
+        <thead>
+        <tr>
+          <th class="text-center" style="width: 50px;">#</th>
+          <th>Name</th>
+          <th class="d-none d-sm-table-cell">Last name</th>
+          <th>Email</th>
+        </tr>
+        </thead>
+        <tbody  *ngFor="let list of myUsers">
+        <tr>
+          <th class="text-center" scope="row">{{list.id}}</th>
+          <td>{{list.username}}</td>
+          <td class="d-none d-sm-table-cell">{{list.name}}</td>
+          <td class="d-none d-sm-table-cell">{{list.email}}</td>
+          <td class="text-center">
+            <div class="btn-group">
+              <button type="button" class="btn btn-sm btn-secondary">
+                <i class="fa fa-pencil"></i>
+              </button>
+              <button type="button" class="btn btn-sm btn-secondary">
+                <i class="fa fa-times"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
     </div>
   </div>
+
+
 </div>
 
