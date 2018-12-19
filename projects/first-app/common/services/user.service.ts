@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Subject } from 'rxjs/internal/Subject';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
-import { Observable } from 'rxjs/internal/Observable';
 import { Observer } from 'rxjs/internal/types';
+import { Observable } from 'rxjs/internal/Observable';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { HttpService } from './http.service';
 import { UserHelper } from '../helpers/user.helper';
 import { KeyValueInterface } from '../interfaces/key-value.interface';
 import { UserModel } from '../models/user.model';
@@ -29,7 +30,7 @@ export class UserService {
    */
   private userBS: BehaviorSubject<UserModel> = new BehaviorSubject<UserModel>(this.user);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpService) {}
 
   /**
    * Method emits the download process of user model from the server
@@ -38,12 +39,11 @@ export class UserService {
    */
   public getUsers(): Observable<UserModel[]> {
     return Observable.create((observer: Observer<UserModel[]>): void => {
-      this.http.get<KeyValueInterface<any>[]>('https://jsonplaceholder.typicode.com/users', {
-        headers: {
-          'Content-type': 'multipart/form-data',
-          'Accept': 'text/html'
-        }
-      }).subscribe(
+      this.http.get<KeyValueInterface<any>[]>(
+        'https://jsonplaceholder.typicode.com/users',
+        {},
+        { 'Content-Type': 'multipart/form-data' }
+      ).subscribe(
         (data: KeyValueInterface<any>[]): void => {
           const users: UserModel[] = data.map<UserModel>(
             (u: KeyValueInterface<any>): UserModel => UserHelper.createUserModel(u)

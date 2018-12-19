@@ -3,8 +3,18 @@
 
 
   <div class="block">
-    <div class="block-header block-header-default justify-content-center">
+    <div class="block-header block-header-default justify-content-between">
       <h4 class="mb-0">Users list</h4>
+      <div class="form-group mb-0">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <i class="fa fa-search"></i>
+            </span>
+          </div>
+          <input class="form-control" placeholder="search.." [(ngModel)]="searchStr">
+        </div>
+      </div>
     </div>
     <div class="block-content">
       <table class="table table-hover table-vcenter">
@@ -18,7 +28,7 @@
           <th class="text-right">Change</th>
         </tr>
         </thead>
-        <tbody  *ngFor="let list of myUsers; index as i">
+        <tbody *ngFor="let list of myUsers | search:searchStr || ''; index as i">
         <tr>
           <th class="text-center" scope="row">{{list.id}}</th>
           <td>{{list.username}}</td>

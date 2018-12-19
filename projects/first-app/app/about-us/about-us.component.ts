@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../common/services/user.service';
-import {HttpErrorResponse} from '@angular/common/http';
-import {UserModel} from '../../common/models/user.model';
+import { HttpErrorResponse } from '@angular/common/http';
+import { UserModel } from '../../common/models/user.model';
 
 @Component({
   selector: 'app-about-us',
@@ -12,6 +12,7 @@ import {UserModel} from '../../common/models/user.model';
 export class AboutUsComponent implements OnInit {
 
   public myUsers: UserModel[];
+  public  searchStr: '';
 
   constructor(private userModel: UserService) {
 

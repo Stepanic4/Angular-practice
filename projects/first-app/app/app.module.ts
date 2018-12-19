@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HighlightDirective } from '../common/directives/highlight.directive';
@@ -22,10 +23,11 @@ import { RadioComponent } from './elements/radio/radio.component';
 import { CheckboxComponent } from './elements/checkbox/checkbox.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MapKeysPipe } from '../common/pipes/map-keys.pipe';
+import { Interceptor } from '../common/services/http-interceptor';
 import { SignInComponent } from './login/sign-in/sign-in.component';
 import { CreateAccountComponent } from './login/create-account/create-account.component';
-import {ClockService} from '../common/services/clock.service';
 import { ForgotPasswordComponent } from './login/forgot-password/forgot-password.component';
+import { SearchPipe } from '../common/pipes/search.pipe';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,7 @@ import { ForgotPasswordComponent } from './login/forgot-password/forgot-password
     NotFoundComponent,
     HighlightDirective,
     MapKeysPipe,
+    SearchPipe,
     AsideComponent,
     FooterComponent,
     ContentComponent,
@@ -48,7 +51,8 @@ import { ForgotPasswordComponent } from './login/forgot-password/forgot-password
     RadioComponent,
     SignInComponent,
     CreateAccountComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    CreateAccountComponent
   ],
   imports: [
     NgbModule,
@@ -58,7 +62,13 @@ import { ForgotPasswordComponent } from './login/forgot-password/forgot-password
     ReactiveFormsModule,
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [ClockService],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: Interceptor,
+      multi: true
+    }
+  ],
   bootstrap: [ AppComponent ]
 })
 
