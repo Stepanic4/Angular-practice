@@ -1,3 +1,5 @@
+
+// http://165.227.140.66/competitions.json  //wodproof server
 // // Primitives
 // const numericVariable: number = 100500;
 // const stringVariable: string = 'Some random string value';
@@ -23,7 +25,7 @@
 //     [ 'b', 2 ]
 //   )
 // );
-// // Values will be set via class method
+// // Values will be set via class method //UntypedJson
 // const map2: Map<string, number> = new Map<string, number>();
 // map2.set('a', 1);
 // map2.set('b', 2);
