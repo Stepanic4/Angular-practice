@@ -1,8 +1,8 @@
-import {EventEmitter, Injectable} from '@angular/core';
-import {fromEvent} from 'rxjs/internal/observable/fromEvent';
-import {Subject} from 'rxjs/internal/Subject';
+import { EventEmitter, Injectable } from '@angular/core';
+import { fromEvent } from 'rxjs/internal/observable/fromEvent';
+import { Subject } from 'rxjs/internal/Subject';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 
 export class LayoutService {
   /**

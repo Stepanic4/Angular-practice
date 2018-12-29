@@ -1,16 +1,14 @@
-<div class="wrapper d-flex flex-column w-25 block">
+<div class="wrapper d-flex flex-column w-25 border p-2">
   <h4>Child component</h4>
   <div>You can define new value for the param</div>
   <input
     class="w-100 mt-1"
     type="text"
     placeholder="New Param Value"
-    #userNameInput>
+    #userNameInput
+  >
   <button
     class="w-100 mt-1"
-    (click)="changeParamValue(userNameInput.value); userNameInput.value = ''">
-    Set New Value
-  </button>
-
-  <app-checkbox></app-checkbox>
+    (click)="changeParamValue(userNameInput.value); userNameInput.value = ''"
+  >Set New Value</button>
 </div>
