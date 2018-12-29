@@ -8,20 +8,25 @@ export class UserHelper {
    * @param parsed { KeyValueInterface<Any> }
    * @returns { UserModel }
    */
-  public static createUserModel(parsed: KeyValueInterface<any>): UserModel {
+  public static createUserModel(parsed: KeyValueInterface<any> = {}): UserModel {
     return new UserModel({
       id: parsed.id.toString(),
       name: parsed.name,
-      email: parsed.email,
-      username: parsed.username,
-      street: parsed.address.street,
-      suite: parsed.address.suite,
       externalAccounts: (
         !!parsed.externalAccounts && parsed.externalAccounts instanceof Array
           ? parsed.externalAccounts.map(UserHelper.createExternalAccountModel)
           : []
       )
     });
+  }
+
+  /**
+   * Method creates user model array from server data
+   * @param data { Any }
+   * @returns { UserModel[] }
+   */
+  public static createUserModelArray(data: any[]): UserModel[] {
+    return data.map((item: KeyValueInterface<any>): UserModel => UserHelper.createUserModel(item));
   }
 
   /**
@@ -33,11 +38,7 @@ export class UserHelper {
     return new ExternalAccountModel({
       id: parsed.id,
       serverName: parsed.serverName,
-      name: parsed.name,
-      email: parsed.email,
-      username: parsed.username,
-      street: parsed.street,
-      suite: parsed.suite
+      username: parsed.username
     });
   }
 
@@ -50,10 +51,6 @@ export class UserHelper {
     return new UserModel({
       id: model.id,
       name: model.name,
-      email: model.email,
-      username: model.username,
-      street: model.street,
-      suite: model.suite,
       externalAccounts: model.externalAccounts.map<ExternalAccountModel>(
         (m: ExternalAccountModel): ExternalAccountModel => {
           return UserHelper.cloneExternalAccountModel(m);
@@ -70,12 +67,8 @@ export class UserHelper {
   public static cloneExternalAccountModel(model: ExternalAccountModel): ExternalAccountModel {
     return new ExternalAccountModel({
       id: model.id,
-      name: model.name,
-      serverName: model.serverName,
-      email: model.email,
       username: model.username,
-      street: model.street,
-      suite: model.suite
+      serverName: model.serverName
     });
   }
 }

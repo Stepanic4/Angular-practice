@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpErrorResponse } from '@angular/common/http';
 import { Subject } from 'rxjs/internal/Subject';
-import { Observer } from 'rxjs/internal/types';
 import { Observable } from 'rxjs/internal/Observable';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { HttpService } from './http.service';
 import { UserHelper } from '../helpers/user.helper';
-import { KeyValueInterface } from '../interfaces/key-value.interface';
 import { UserModel } from '../models/user.model';
 
 @Injectable({ providedIn: 'root' })
@@ -38,22 +35,10 @@ export class UserService {
    * @async
    */
   public getUsers(): Observable<UserModel[]> {
-    return Observable.create((observer: Observer<UserModel[]>): void => {
-      this.http.get<KeyValueInterface<any>[]>(
-        'https://jsonplaceholder.typicode.com/users',
-        {},
-        { 'Content-Type': 'multipart/form-data' }
-      ).subscribe(
-        (data: KeyValueInterface<any>[]): void => {
-          const users: UserModel[] = data.map<UserModel>(
-            (u: KeyValueInterface<any>): UserModel => UserHelper.createUserModel(u)
-          );
-          observer.next(users);
-        },
-        (error: HttpErrorResponse): void => observer.error(error),
-        (): void => observer.complete()
-      );
-    });
+    return this.http.get<UserModel[]>(
+      'https://jsonplaceholder.typicode.com/users',
+      UserHelper.createUserModelArray
+    );
   }
 
   /**
@@ -62,13 +47,10 @@ export class UserService {
    * @async
    */
   public getUser(id: string): Observable<UserModel> {
-    return Observable.create((observer: Observer<UserModel>): void => {
-      this.http.get<KeyValueInterface<any> >(`https://jsonplaceholder.typicode.com/users${id}`).subscribe(
-        (data: KeyValueInterface<any>): void => observer.next(UserHelper.createUserModel(data)),
-        (error: HttpErrorResponse): void => observer.error(error),
-        (): void => observer.complete()
-      );
-    });
+    return this.http.get<UserModel>(
+      `https://jsonplaceholder.typicode.com/users/${id}`,
+      UserHelper.createUserModel
+    );
   }
 
   /**

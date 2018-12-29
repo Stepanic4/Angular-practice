@@ -1,5 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import { ClockService } from '../../common/services/clock.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-main-page',
@@ -7,13 +6,4 @@ import { ClockService } from '../../common/services/clock.service';
   styleUrls: [ './main-page.component.scss' ]
 })
 
-export class MainPageComponent implements OnInit {
-
-  public time;
-
-  constructor(private clockService: ClockService) {}
-
-  public ngOnInit() {
-    this.time = this.clockService.getCurrentTime();
-  }
-}
+export class MainPageComponent {}

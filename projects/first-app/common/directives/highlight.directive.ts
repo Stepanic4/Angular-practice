@@ -43,6 +43,6 @@ export class HighlightDirective {
    * @returns { void }
    */
   private changeColor(color: string) {
-    this.elementRef.nativeElement.style.color = color || this.defaultColor || null;
+    this.elementRef.nativeElement.style.backgroundColor = color || this.defaultColor || null;
   }
 }

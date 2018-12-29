@@ -1,13 +1,12 @@
-import {Injectable} from '@angular/core';
-import {HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {LocalstorageService} from './localstorage.service';
+import { Injectable } from '@angular/core';
+import { HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { LocalstorageService } from './localstorage.service';
 
 @Injectable()
 
 export class Interceptor implements HttpInterceptor {
-  constructor(private localstorageService: LocalstorageService) {
-  }
+  constructor(private localstorageService: LocalstorageService) {}
 
   /**
    * Method that we need to implement due to the HttpInterceptor interface

@@ -6,9 +6,6 @@ import { Level2Component } from '../../app/level2/level2.component';
 import { Level3Component } from '../../app/level3/level3.component';
 import { AboutUsComponent } from '../../app/about-us/about-us.component';
 import { MainPageComponent } from '../../app/main-page/main-page.component';
-import { SignInComponent } from '../../app/login/sign-in/sign-in.component';
-import { CreateAccountComponent } from '../../app/login/create-account/create-account.component';
-import {ForgotPasswordComponent} from '../../app/login/forgot-password/forgot-password.component';
 
 export const ROUTES: Routes = [
   {
@@ -47,18 +44,5 @@ export const ROUTES: Routes = [
       }
     ]
   },
-  {
-    path: 'sign-in',
-    component: SignInComponent
-  },
-  {
-    path: 'create-account',
-    component: CreateAccountComponent
-  },
-  {
-    path: 'forgot-password',
-    component: ForgotPasswordComponent
-  },
-
   { path: '**', component: NotFoundComponent }
 ];
