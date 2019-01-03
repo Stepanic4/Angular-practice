@@ -8,15 +8,23 @@ import { LayoutService } from '../common/services/layout.service';
 })
 
 export class AppComponent {
+
+  public clickName: any;
+  public  keyDown: any;
+  public  keyUp: any;
+
   constructor(private layoutService: LayoutService) {
     this.layoutService.onBodyClick.subscribe((event: MouseEvent): void => {
-      console.log('Click', event);
+      // console.log('Click', event);
+      this.clickName = event;
     });
     this.layoutService.onBodyKeyDown.subscribe((event: KeyboardEvent): void => {
-      console.log('KeyDown', event);
+      // console.log('KeyDown', event);
+      this.keyDown = event;
     });
     this.layoutService.onBodyKeyUp.subscribe((event: KeyboardEvent): void => {
-      console.log('KeyUp', event);
+      // console.log('KeyUp', event);
+      this.keyUp = event;
     });
   }
 }

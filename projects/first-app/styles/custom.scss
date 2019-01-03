@@ -1,4 +1,13 @@
 
-.wrapper {
+.h100-vh {
   height: 100vh;
 }
+
+section {
+  flex: 1 0 auto !important;
+}
+
+footer {
+  flex: 0 0 auto !important;
+}
+

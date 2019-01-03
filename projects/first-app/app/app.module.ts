@@ -17,6 +17,12 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { ROUTES } from '../common/const/routes.const';
 import { MapKeysPipe } from '../common/pipes/map-keys.pipe';
 import { Interceptor } from '../common/services/http-interceptor';
+import {AsideComponent} from './layout/aside/aside.component';
+import {FooterComponent} from './layout/footer/footer.component';
+import {CreateAccountComponent} from './login/create-account/create-account.component';
+import {ForgotPasswordComponent} from './login/forgot-password/forgot-password.component';
+import {SignInComponent} from './login/sign-in/sign-in.component';
+import {SearchPipe} from '../common/pipes/search.pipe';
 
 @NgModule({
   declarations: [
@@ -30,7 +36,13 @@ import { Interceptor } from '../common/services/http-interceptor';
     MainPageComponent,
     NotFoundComponent,
     HighlightDirective,
-    MapKeysPipe
+    MapKeysPipe,
+    SearchPipe,
+    AsideComponent,
+    FooterComponent,
+    CreateAccountComponent,
+    ForgotPasswordComponent,
+    SignInComponent
   ],
   imports: [
     NgbModule,

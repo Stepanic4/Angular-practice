@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AsideComponent implements OnInit {
 
-  constructor() { }
+  constructor() {}
 
   public ngOnInit() {
   }
