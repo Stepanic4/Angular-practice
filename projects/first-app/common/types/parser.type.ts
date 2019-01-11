@@ -1,1 +1,1 @@
-export type ParserType<T> = (data: any) => T;
+export type ParserType<R, T> = (data: R) => T;

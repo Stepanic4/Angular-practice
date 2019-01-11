@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpEvent } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { catchError, map } from 'rxjs/operators';
+import { throwError } from 'rxjs/internal/observable/throwError';
 import { Observable } from 'rxjs/internal/Observable';
-import { Observer } from 'rxjs/internal/types';
 import { HttpHelper } from '../helpers/http.helper';
+import { ErrorHelper } from '../helpers/error.helper';
 import { KeyValueInterface } from '../interfaces/key-value.interface';
 import { ParserType } from '../types/parser.type';
-import { ErrorHelper } from '../helpers/error.helper';
 
 @Injectable({ providedIn: 'root' })
 
@@ -15,20 +16,19 @@ export class HttpService {
   /**
    * GET request
    * @param url { String }
+   * @param parser { ParserType<R, T> }
    * @param queryParams { KeyValueInterface<String> }
-   * @param parser { ParserType<T> }
-   * @param requestParams { Any }
+   * @param requestParams { KeyValueInterface<Any> }
    * @returns { Observable<T> }
-   * @async
    */
-  public get<T>(
+  public get<R, T>(
     url: string,
-    parser?: ParserType<T>,
+    parser?: ParserType<R, T>,
     queryParams: KeyValueInterface<string> = {},
-    requestParams: any = {}
+    requestParams: KeyValueInterface<any> = {}
   ): Observable<T> {
-    return this.sendRequest<T>(
-      this.http.get<T>(`${url}${HttpHelper.createQueryString(queryParams)}`, requestParams),
+    return this.sendRequest<R, T>(
+      this.http.get<R>(`${url}${HttpHelper.createQueryString(queryParams)}`, requestParams),
       parser
     );
   }
@@ -37,53 +37,42 @@ export class HttpService {
    * POST request
    * @param url { String }
    * @param body { KeyValueInterface<Any> }
-   * @param parser { ParserType<T> }
+   * @param parser { ParserType<R, T> }
    * @param queryParams { KeyValueInterface<String> }
-   * @param requestParams { Any }
+   * @param requestParams { KeyValueInterface<Any> }
    * @returns { Observable<T> }
-   * @async
    */
-  public post<T>(
+  public post<R, T>(
     url: string,
     body: KeyValueInterface<any>,
-    parser?: ParserType<T>,
+    parser?: ParserType<R, T>,
     queryParams: KeyValueInterface<string> = {},
-    requestParams: any = {}
+    requestParams: KeyValueInterface<any> = {}
   ): Observable<T> {
-    return this.sendRequest(
-      this.http.post<T>(
-        `${url}${HttpHelper.createQueryString(queryParams)}`,
-        body,
-        requestParams
-      ),
+    return this.sendRequest<R, T>(
+      this.http.post<R>(`${url}${HttpHelper.createQueryString(queryParams)}`, body, requestParams),
       parser
     );
   }
-
 
   /**
    * PUT request
    * @param url { String }
    * @param body { KeyValueInterface<Any> }
-   * @param parser { ParserType<T> }
+   * @param parser { ParserType<R, T> }
    * @param queryParams { KeyValueInterface<String> }
-   * @param requestParams { Any }
+   * @param requestParams { KeyValueInterface<Any> }
    * @returns { Observable<T> }
-   * @async
    */
-  public put<T>(
+  public put<R, T>(
     url: string,
     body: KeyValueInterface<any>,
-    parser?: ParserType<T>,
+    parser?: ParserType<R, T>,
     queryParams: KeyValueInterface<string> = {},
-    requestParams: any = {}
+    requestParams: KeyValueInterface<any> = {}
   ): Observable<T> {
-    return this.sendRequest(
-      this.http.put<T>(
-        `${url}${HttpHelper.createQueryString(queryParams)}`,
-        body,
-        requestParams
-      ),
+    return this.sendRequest<R, T>(
+      this.http.put<R>(`${url}${HttpHelper.createQueryString(queryParams)}`, body, requestParams),
       parser
     );
   }
@@ -92,25 +81,20 @@ export class HttpService {
    * PATCH request
    * @param url { String }
    * @param body { KeyValueInterface<Any> }
-   * @param parser { ParserType<T> }
+   * @param parser { ParserType<R, T> }
    * @param queryParams { KeyValueInterface<String> }
-   * @param requestParams { Any }
+   * @param requestParams { KeyValueInterface<Any> }
    * @returns { Observable<T> }
-   * @async
    */
-  public patch<T>(
+  public patch<R, T>(
     url: string,
     body: KeyValueInterface<any>,
-    parser?: ParserType<T>,
+    parser?: ParserType<R, T>,
     queryParams: KeyValueInterface<string> = {},
-    requestParams: any = {}
+    requestParams: KeyValueInterface<any> = {}
   ): Observable<T> {
-    return this.sendRequest(
-      this.http.patch<T>(
-        `${url}${HttpHelper.createQueryString(queryParams)}`,
-        body,
-        requestParams
-      ),
+    return this.sendRequest<R, T>(
+      this.http.patch<R>(`${url}${HttpHelper.createQueryString(queryParams)}`, body, requestParams),
       parser
     );
   }
@@ -118,44 +102,78 @@ export class HttpService {
   /**
    * DELETE request
    * @param url { String }
-   * @param parser { ParserType<T> }
-   * @param queryParams { KeyValueInterface<Any> }
-   * @param requestParams { Any }
+   * @param parser { ParserType<R, T> }
+   * @param queryParams { KeyValueInterface<String> }
+   * @param requestParams { KeyValueInterface<Any> }
    * @returns { Observable<T> }
-   * @async
    */
-  public delete<T>(
+  public delete<R, T>(
     url: string,
-    parser?: ParserType<T>,
+    parser?: ParserType<R, T>,
     queryParams: KeyValueInterface<string> = {},
-    requestParams: any = {}
+    requestParams: KeyValueInterface<any> = {}
   ): Observable<T> {
-    return this.sendRequest(
-      this.http.delete<T>(
-        `${url}${HttpHelper.createQueryString(queryParams)}`,
-        requestParams
-      ),
+    return this.sendRequest<R, T>(
+      this.http.delete<R>(`${url}${HttpHelper.createQueryString(queryParams)}`, requestParams),
+      parser
+    );
+  }
+
+  /**
+   * Head request
+   * @param url { String }
+   * @param parser { ParserType<R, T> }
+   * @param queryParams { KeyValueInterface<String> }
+   * @param requestParams { KeyValueInterface<Any> }
+   * @returns { Observable<T> }
+   */
+  public head<R, T>(
+    url: string,
+    parser?: ParserType<R, T>,
+    queryParams: KeyValueInterface<string> = {},
+    requestParams: KeyValueInterface<any> = {}
+  ): Observable<T> {
+    return this.sendRequest<R, T>(
+      this.http.head<R>(`${url}${HttpHelper.createQueryString(queryParams)}`, requestParams),
+      parser
+    );
+  }
+
+  /**
+   * Options request
+   * @param url { String }
+   * @param parser { ParserType<R, T> }
+   * @param queryParams { KeyValueInterface<String> }
+   * @param requestParams { KeyValueInterface<Any> }
+   * @returns { Observable<T> }
+   */
+  public options<R, T>(
+    url: string,
+    parser?: ParserType<R, T>,
+    queryParams: KeyValueInterface<string> = {},
+    requestParams: KeyValueInterface<any> = {}
+  ): Observable<T> {
+    return this.sendRequest<R, T>(
+      this.http.head<R>(`${url}${HttpHelper.createQueryString(queryParams)}`, requestParams),
       parser
     );
   }
 
   /**
    * Request runner
-   * @param method { Observable<HttpEvent<T>> }
-   * @param parser { ParserType<T> }
+   * @param method { Observable<R> }
+   * @param parser { ParserType<R, T> }
    * @returns { Observable<T> }
-   * @async
    */
-  private sendRequest<T>(
-    method: Observable<HttpEvent<T>>,
-    parser: ParserType<T> = (data: any): T => data
+  private sendRequest<R, T>(
+    method: Observable<R>,
+    parser: ParserType<R, T> = (data: any): T => data as T
   ): Observable<T> {
-    return Observable.create((observer: Observer<T>): void => {
-      method.subscribe(
-        (data: HttpEvent<any>): void => observer.next(parser(data)),
-        (error: HttpErrorResponse): void => observer.error(ErrorHelper.createErrorModelFromHttpError(error)),
-        (): void => observer.complete()
-      );
-    });
+    return method.pipe<T, T>(
+      map<R, T>(parser),
+      catchError<T, never>((err: HttpErrorResponse): Observable<never> => {
+        return throwError(ErrorHelper.createErrorModelFromHttpError(err));
+      })
+    );
   }
 }

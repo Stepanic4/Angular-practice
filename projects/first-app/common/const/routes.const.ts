@@ -9,6 +9,7 @@ import { MainPageComponent } from '../../app/main-page/main-page.component';
 import { SignInComponent } from '../../app/login/sign-in/sign-in.component';
 import {CreateAccountComponent} from '../../app/login/create-account/create-account.component';
 import {ForgotPasswordComponent} from '../../app/login/forgot-password/forgot-password.component';
+import {UserEditComponent} from '../../app/user-edit/user-edit.component';
 
 export const ROUTES: Routes = [
   {
@@ -44,6 +45,14 @@ export const ROUTES: Routes = [
       {
         path: 'about-us',
         component: AboutUsComponent
+      },
+      {
+        path: 'user-edit',
+        component: UserEditComponent
+      },
+      {
+        path: 'lazy-loaded-module',
+        loadChildren: './lazy-loaded/lazy-loaded.module#LazyLoadedModule'
       }
     ]
   },

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Data } from '@angular/router';
+import { PageLeaveCheckInterface } from '../../common/interfaces/page-leave-check.interface';
+import { Observable } from 'rxjs/internal/Observable';
+import { of } from 'rxjs/internal/observable/of';
 
 @Component({
   selector: 'app-level2',
@@ -7,14 +10,23 @@ import { ActivatedRoute, Data } from '@angular/router';
   styleUrls: [ './level2.component.scss' ]
 })
 
-export class Level2Component implements OnInit {
+export class Level2Component implements OnInit, PageLeaveCheckInterface {
   /**
    * Saved data from the router that related to component's route
    * @type { Data }
    */
   public data: Data;
 
-  constructor(private activatedRoute: ActivatedRoute) {}
+  private canLeave: boolean;
+
+  constructor(private activatedRoute: ActivatedRoute) {
+    setTimeout(
+      (): void => {
+        this.canLeave = true;
+      },
+      5000
+    );
+  }
 
   /**
    * Method will be called by Angular when component will be initialized
@@ -26,5 +38,9 @@ export class Level2Component implements OnInit {
         this.data = data;
       }
     );
+  }
+
+  public pageLeaveCheck(): Observable<boolean> {
+    return of<boolean>(this.canLeave);
   }
 }

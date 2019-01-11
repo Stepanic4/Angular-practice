@@ -1,6 +1,15 @@
 <div class="content">
-  <h1>About Us Component</h1>
 
+  <div class="block-header">
+    <h3 class="block-title font-w600">About Us Component</h3>
+    <div class="block-options">
+      <button class="btn btn-primary"
+        (click)="changeCanLeave()">
+        <i class="fa fa-deaf"></i>
+        Press to leave this route
+      </button>
+    </div>
+  </div>
 
   <div class="block">
     <div class="block-header block-header-default justify-content-between">
@@ -31,7 +40,7 @@
         <tbody *ngFor="let list of myUsers | search:searchStr || '';">
         <tr>
           <th class="text-center" scope="row">{{list.id}}</th>
-          <td>{{list.username}}</td>
+          <td [routerLink]="'/user-edit'" class="cur-point">{{list.username}}</td>
           <td class="d-none d-sm-table-cell">{{list.name}}</td>
           <td class="d-none d-sm-table-cell">{{list.email}}</td>
           <td class="d-none d-sm-table-cell">{{list.street}}.&nbsp;{{list.suite}}</td>
