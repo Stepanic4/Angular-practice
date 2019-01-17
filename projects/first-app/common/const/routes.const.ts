@@ -47,7 +47,7 @@ export const ROUTES: Routes = [
         component: AboutUsComponent
       },
       {
-        path: 'user-edit',
+        path: 'user-edit/:id',
         component: UserEditComponent
       },
       {

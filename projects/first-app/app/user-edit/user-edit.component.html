@@ -1,7 +1,42 @@
 <div class="content">
-  <h3>User-edit works!</h3>
+  <h3 class="content-heading text-center">Change your first and last name</h3>
 
-  <p></p>
+  <div class="col-md-4">
+    <div class="block block-themed">
+      <div class="block-header bg-default">
+        <h3 class="block-title">Change user data {{user.id}}</h3>
+      </div>
+      <div class="block-content block-content-full text-center bg-default-lighter">
+        <img class="img-avatar img-avatar96 img-avatar-thumb" src="../../assets/media/avatars/micro.png" alt="muricat">
+      </div>
+      <div class="block-content">
+        <form action="" method="post" (ngSubmit)="onSubmited()">
+          <div class="form-group row">
+            <label class="col-12" for="first-name">First name</label>
+            <div class="col-12">
+              <input type="text" [(ngModel)]="user.username" class="form-control" id="first-name" name="first-name">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-12" for="last-name">Last name</label>
+            <div class="col-12">
+              <input type="text" class="form-control" id="last-name" name="last-name" [(ngModel)]="user.name">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-12">
+              <button type="submit" class="btn btn-alt-primary mr-5">
+                <i class="fa fa-send mr-5"></i> Submit
+              </button>
+              <button type="button" class="btn btn-alt-primary" (click)="goBack()">
+                <i class="fa fa-send mr-5"></i> Back
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
 
 </div>

@@ -40,16 +40,16 @@
         <tbody *ngFor="let list of myUsers | search:searchStr || '';">
         <tr>
           <th class="text-center" scope="row">{{list.id}}</th>
-          <td [routerLink]="'/user-edit'" class="cur-point">{{list.username}}</td>
+          <td class="text-left">{{list.username}}</td>
           <td class="d-none d-sm-table-cell">{{list.name}}</td>
           <td class="d-none d-sm-table-cell">{{list.email}}</td>
           <td class="d-none d-sm-table-cell">{{list.street}}.&nbsp;{{list.suite}}</td>
           <td class="text-right">
             <div class="btn-group">
-              <button type="button" class="btn btn-sm btn-secondary">
+              <button type="button" class="btn btn-sm btn-secondary" [routerLink]="['/user-edit', list.id]">
                 <i class="fa fa-pencil"></i>
               </button>
-              <button type="button" class="btn btn-sm btn-secondary ss">
+              <button type="button" class="btn btn-sm btn-secondary">
                 <i class="fa fa-times"></i>
               </button>
             </div>
