@@ -1,56 +1,35 @@
-<div class="content">
-  <h1>About Us Component</h1>
+<h1>About Us</h1>
+<p>Some random text.</p>
+<h2 (click)="checkClick($event)">Send feedback</h2>
+<button
+  class="btn-primary"
+  (click)="checkClick($event)"
+>Press to leave this route</button>
 
+<div class="file">
+  <input
+    type="file"
+    class="d-none"
+    [attr.multiple]="multiple ? true : null"
+    (change)="onChangeHandler()"
+  >
 
-  <div class="block">
-    <div class="block-header block-header-default justify-content-between">
-      <h4 class="mb-0">Users list</h4>
-      <div class="form-group mb-0">
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text">
-              <i class="fa fa-search"></i>
-            </span>
-          </div>
-          <input class="form-control" placeholder="search.." [(ngModel)]="searchStr">
-        </div>
-      </div>
-    </div>
-    <div class="block-content">
-      <table class="table table-hover table-vcenter">
-        <thead>
-        <tr>
-          <th class="text-center" style="width: 50px;">#</th>
-          <th>Name</th>
-          <th class="d-none d-sm-table-cell">Last name</th>
-          <th>Email</th>
-          <th>Address</th>
-          <th class="text-right">Change</th>
-        </tr>
-        </thead>
-        <tbody *ngFor="let list of myUsers | search:searchStr || ''; index as i">
-        <tr>
-          <th class="text-center" scope="row">{{list.id}}</th>
-          <td>{{list.username}}</td>
-          <td class="d-none d-sm-table-cell">{{list.name}}</td>
-          <td class="d-none d-sm-table-cell">{{list.email}}</td>
-          <td class="d-none d-sm-table-cell">{{list.street}}.&nbsp;{{list.suite}}</td>
-          <td class="text-right">
-            <div class="btn-group">
-              <button type="button" class="btn btn-sm btn-secondary">
-                <i class="fa fa-pencil"></i>
-              </button>
-              <button type="button" class="btn btn-sm btn-secondary">
-                <i class="fa fa-times"></i>
-              </button>
-            </div>
-          </td>
-        </tr>
-        </tbody>
-      </table>
+  <div class="d-flex">
+    <button class="p-2 text-uppercase" (click)="emitInputClick()">Select File</button>
+    <button class="ml-2 p-2 text-uppercase" (click)="startUploading()">Load File</button>
+    <div
+      class="drop ml-2 p-4 bg-primary"
+      (dragover)="cancelDragEvent($event)"
+      (drop)="cancelDragEvent($event); onChangeHandler($event.dataTransfer.files);"
+    ></div>
+  </div>
+  <div *ngIf="!!files?.length">
+    <div
+      class="d-flex"
+      *ngFor="let file of files"
+    >
+      <span>{{ file.name }} ({{ file.lastModified | date:'short' }})</span>
+      <button (click)="deleteFile(file)">&times;</button>
     </div>
   </div>
-
-
 </div>
-

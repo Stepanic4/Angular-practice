@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HighlightDirective } from '../common/directives/highlight.directive';
 import { AppComponent } from './app.component';
@@ -13,21 +14,10 @@ import { Level3Component } from './level3/level3.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { ROUTES } from '../common/const/routes.const';
-import { HttpClientModule } from '@angular/common/http';
-import { AsideComponent } from './layout/aside/aside.component';
-import { FooterComponent } from './layout/footer/footer.component';
-import { ContentComponent } from './layout/content/content.component';
-import { SelectComponent } from './elements/select/select.component';
-import { RadioComponent } from './elements/radio/radio.component';
-import { CheckboxComponent } from './elements/checkbox/checkbox.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PaginationComponent } from './pagination/pagination.component';
 import { MapKeysPipe } from '../common/pipes/map-keys.pipe';
 import { Interceptor } from '../common/services/http-interceptor';
-import { SignInComponent } from './login/sign-in/sign-in.component';
-import { CreateAccountComponent } from './login/create-account/create-account.component';
-import { ForgotPasswordComponent } from './login/forgot-password/forgot-password.component';
-import { SearchPipe } from '../common/pipes/search.pipe';
+import { ROUTES } from '../common/const/routes.const';
 
 @NgModule({
   declarations: [
@@ -40,19 +30,9 @@ import { SearchPipe } from '../common/pipes/search.pipe';
     AboutUsComponent,
     MainPageComponent,
     NotFoundComponent,
+    PaginationComponent,
     HighlightDirective,
-    MapKeysPipe,
-    SearchPipe,
-    AsideComponent,
-    FooterComponent,
-    ContentComponent,
-    CheckboxComponent,
-    SelectComponent,
-    RadioComponent,
-    SignInComponent,
-    CreateAccountComponent,
-    ForgotPasswordComponent,
-    CreateAccountComponent
+    MapKeysPipe
   ],
   imports: [
     NgbModule,

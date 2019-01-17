@@ -7,7 +7,6 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 
 export class ChildComponent {
-
   /**
    * Event will be emitted to give the new param value to parent component
    * @type { EventEmitter<UserModel> }

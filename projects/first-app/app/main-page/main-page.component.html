@@ -1,23 +1,14 @@
-<div class="content">
-  <div class="block-content pb-50">
-    <h1>
-      This main page
-    </h1>
-
-    <div class="row">
-      <div class="col-sm-4 text-center">
-        <app-checkbox></app-checkbox>
-      </div>
-      <div class="col-sm-4 text-center">
-        <app-radio></app-radio>
-      </div>
-      <div class="col-sm-4 text-center">
-        <app-select></app-select>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-12 pt-50 h4">Today is <span class="text-primary">{{ time | async | date: 'EEEE dd MMMM yyyy, HH:mm:ss'}}</span></div>
-    </div>
-  </div>
+<div>Some content for the main page</div>
+<div
+  class="d-flex mb-3"
+  *ngFor="let post of postSegment"
+>
+  <div>ID: {{ post.id }}</div>
+  <div>Title: {{ post.title }}</div>
 </div>
 
+<app-pagination
+  *ngIf="paginationParams"
+  [params]="paginationParams"
+  (onChange)="getPosts($event)"
+></app-pagination>

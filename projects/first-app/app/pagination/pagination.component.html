@@ -1,0 +1,39 @@
+<nav class="position-relative d-flex justify-content-center align-items-center w-100 h-100">
+  <div
+    class="position-absolute d-flex align-items-center h-100"
+    *ngIf="!!params.total"
+  >Total: {{ params.total }}</div>
+  <ul class="pagination pagination-sm justify-content-center align-items-center h-100 m-0">
+    <li
+      class="page-item mr-1 border-primary border text-center"
+      *ngIf="params.current > 1 && params.total / params.perPage > 1"
+      (click)="onItemClickHandler(1)"
+    >
+      <span
+        class="bg-transparent text-primary page-link d-flex justify-content-center align-items-center p-0 rounded-0 border-0"
+      >«</span>
+    </li>
+    <li
+      class="page-item ml-1 mr-1 border-primary border text-center"
+      *ngFor="let index of indexes"
+      [class.bg-success]="index === params.current"
+      (click)="onItemClickHandler(index)"
+    >
+      <span
+        class="bg-transparent text-primary page-link d-flex justify-content-center align-items-center p-0 rounded-0 border-0"
+      >{{ index }}</span>
+    </li>
+    <li
+      class="page-item ml-1 mr-1 border-primary border text-center"
+      *ngIf="
+        params.current < params.total / params.perPage &&
+        params.total / params.perPage > 1
+      "
+      (click)="onItemClickHandler(params.total / params.perPage)"
+    >
+      <span
+        class="bg-transparent text-primary page-link d-flex justify-content-center align-items-center p-0 rounded-0 border-0"
+      >»</span>
+    </li>
+  </ul>
+</nav>

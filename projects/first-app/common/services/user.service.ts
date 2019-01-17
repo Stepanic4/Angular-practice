@@ -1,28 +1,23 @@
 import { Injectable } from '@angular/core';
-import { HttpErrorResponse } from '@angular/common/http';
-import { Subject } from 'rxjs/internal/Subject';
-import { Observer } from 'rxjs/internal/types';
 import { Observable } from 'rxjs/internal/Observable';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { HttpService } from './http.service';
 import { UserHelper } from '../helpers/user.helper';
-import { KeyValueInterface } from '../interfaces/key-value.interface';
 import { UserModel } from '../models/user.model';
+import { KeyValueInterface } from '../interfaces/key-value.interface';
 
 @Injectable({ providedIn: 'root' })
 
 export class UserService {
   /**
-   * Subject for subscribe from the outside
-   * @type { Subject<UserModel> }
-   */
-  public userSubject: Subject<UserModel> = new Subject<UserModel>();
-
-  /**
    * Saved copy of user model. Won't be available from the outside.
    * All entities that require user model should get it via the onUserChange property over the subscription
    */
-  private user: UserModel;
+  private user: UserModel = new UserModel({
+    id: '100500',
+    name: 'User#1',
+    externalAccounts: []
+  });
 
   /**
    * Behavior subject for user property
@@ -32,28 +27,24 @@ export class UserService {
 
   constructor(private http: HttpService) {}
 
+  public getStateSubscription(): Observable<UserModel> {
+    return this.userBS.asObservable();
+  }
+
+  public isLogged(): boolean {
+    return !!this.user;
+  }
+
   /**
    * Method emits the download process of user model from the server
    * @returns { Promise<UserModel> }
    * @async
    */
   public getUsers(): Observable<UserModel[]> {
-    return Observable.create((observer: Observer<UserModel[]>): void => {
-      this.http.get<KeyValueInterface<any>[]>(
-        'https://jsonplaceholder.typicode.com/users',
-        {},
-        { 'Content-Type': 'multipart/form-data' }
-      ).subscribe(
-        (data: KeyValueInterface<any>[]): void => {
-          const users: UserModel[] = data.map<UserModel>(
-            (u: KeyValueInterface<any>): UserModel => UserHelper.createUserModel(u)
-          );
-          observer.next(users);
-        },
-        (error: HttpErrorResponse): void => observer.error(error),
-        (): void => observer.complete()
-      );
-    });
+    return this.http.get<KeyValueInterface<any>[], UserModel[]>(
+      'https://jsonplaceholder.typicode.com/users',
+      UserHelper.createUserModelArray
+    );
   }
 
   /**
@@ -62,13 +53,10 @@ export class UserService {
    * @async
    */
   public getUser(id: string): Observable<UserModel> {
-    return Observable.create((observer: Observer<UserModel>): void => {
-      this.http.get<KeyValueInterface<any> >(`https://jsonplaceholder.typicode.com/users${id}`).subscribe(
-        (data: KeyValueInterface<any>): void => observer.next(UserHelper.createUserModel(data)),
-        (error: HttpErrorResponse): void => observer.error(error),
-        (): void => observer.complete()
-      );
-    });
+    return this.http.get<KeyValueInterface<any>, UserModel>(
+      `https://jsonplaceholder.typicode.com/users/${id}`,
+      UserHelper.createUserModel
+    );
   }
 
   /**
@@ -76,7 +64,7 @@ export class UserService {
    * @param user { UserModel }
    */
   public dispatch(user: UserModel): void {
-    this.sendNewUserToSubscribers(user);
+    this.next(user);
   }
 
   /**
@@ -85,14 +73,11 @@ export class UserService {
    * @param user { UserModel }
    * @returns { void }
    */
-  private sendNewUserToSubscribers(user: UserModel): void {
+  private next(user: UserModel): void {
     // Saving new value
     this.user = user;
 
     // Sending update to subscribers via BehaviorSubject
     this.userBS.next(this.user);
-
-    // Sending update to subscribers via Subject
-    this.userSubject.next(this.user);
   }
 }

@@ -106,6 +106,113 @@
         }
       }
     },
+//    *********************NEW******************
+
+    "last-app": {
+      "root": "",
+      "sourceRoot": "projects/last-app",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/last-app",
+            "index": "projects/last-app/index.html",
+            "main": "projects/last-app/main.ts",
+            "polyfills": "projects/last-app/polyfills.ts",
+            "tsConfig": "projects/last-app/tsconfig.app.json",
+            "assets": [
+              "projects/last-app/favicon.ico",
+              "projects/last-app/assets"
+            ],
+            "styles": [
+              "projects/last-app/styles/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/last-app/environments/environment.ts",
+                  "with": "projects/last-app/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "last-app:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "last-app:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "last-app:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/last-app/test.ts",
+            "polyfills": "projects/last-app/polyfills.ts",
+            "tsConfig": "projects/last-app/tsconfig.spec.json",
+            "karmaConfig": "projects/last-app/karma.conf.js",
+            "styles": [
+              "projects/last-app/styles/styles.scss"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/last-app/favicon.ico",
+              "projects/last-app/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/last-app/tsconfig.app.json",
+              "projects/last-app/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+//    *********************NEW******************
+
     "spalah-angular-app-e2e": {
       "root": "e2e/",
       "projectType": "application",
@@ -134,6 +241,6 @@
         }
       }
     }
-  },
-  "defaultProject": "spalah-angular-app"
+  }
+//  "defaultProject": "spalah-angular-app"
 }

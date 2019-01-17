@@ -1,60 +1,60 @@
 <div class="wrapper w-100 h-100 d-flex flex-column">
-  <div class="content pb-20 mb-0 block d-flex justify-content-around text-uppercase font-w600">
+  <header class="d-flex justify-content-between align-items-end h-25 border-bottom">
     <a
-      class="link-effect"
+      class="text-center"
       [routerLink]="'/'"
       [routerLinkActive]="'text-success'"
       [routerLinkActiveOptions]="{ exact: true }"
       [appHighlight]="'yellow'"
     >Main Page</a>
     <a
-      class="link-effect"
+      class="text-center"
       [routerLink]="'/level1'"
       [routerLinkActive]="'text-success'"
       [routerLinkActiveOptions]="{ exact: true }"
       [appHighlight]="'green'"
     >Level 1</a>
     <a
-      class="link-effect"
+      class="text-center"
       [routerLink]="'/level1/level2'"
       [routerLinkActive]="'text-success'"
       [routerLinkActiveOptions]="{ exact: true }"
       [appHighlight]="'blue'"
     >Level 2</a>
     <a
-      class="link-effect"
+      class="text-center"
       [routerLink]="'/level1/level2/level3'"
       [routerLinkActive]="'text-success'"
       [routerLinkActiveOptions]="{ exact: true }"
       [appHighlight]="'red'"
     >Level 3</a>
     <a
-      class="link-effect"
+      class="text-center"
       [routerLink]="'/level1/level2/level3/someID'"
       [routerLinkActive]="'text-success'"
       [routerLinkActiveOptions]="{ exact: true }"
       [appHighlight]="'maroon'"
     >Level 3 with param</a>
     <a
-      class="link-effect"
+      class="text-center"
       [routerLink]="'/about-us'"
       [routerLinkActive]="'text-success'"
       [appHighlight]="'brown'"
     >About Us</a>
-    <a class="link-effect"
-    [routerLink]="'/sign-in'"
-    [routerLinkActive]>
-      <i class="si si-logout mr-2"></i>Logout</a>
-  </div>
-  <section class="d-flex justify-content-between h-50 pt-0">
-
-    <app-aside class="my-20 px-20 d-flex justify-content-center align-items-center"></app-aside>
-
-    <main class="w-100 block m-20">
-      <app-content></app-content>
+    <a
+      class="text-center"
+      [routerLink]="'/lazy-loaded-module'"
+      [routerLinkActive]="'text-success'"
+      [appHighlight]="'red'"
+    >LL</a>
+  </header>
+  <section class="content d-flex justify-content-between h-50">
+    <aside class="d-flex justify-content-center align-items-center w-25 border-right">
+      Aside Content
+    </aside>
+    <main class="w-75 p-2">
+      <router-outlet></router-outlet>
     </main>
   </section>
-
-  <app-footer></app-footer>
-
+  <footer class="d-flex justify-content-center align-items-center h-25 border-top">Footer Content</footer>
 </div>

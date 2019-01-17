@@ -1,0 +1,40 @@
+:host {
+  display: block;
+  height: 30px;
+
+  & > nav {
+    & > div {
+      top: 0;
+      left: 6px;
+      font-size: 12px;
+    }
+
+    & > ul {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+
+      li {
+        width: 30px;
+        transition: background .4s;
+
+        &:not(.bg-primary) {
+          &:hover {
+            cursor: pointer;
+          }
+        }
+
+        &.bg-primary {
+          &:hover {
+            cursor: not-allowed;
+          }
+        }
+
+        span {
+          line-height: 30px;
+        }
+      }
+    }
+  }
+}

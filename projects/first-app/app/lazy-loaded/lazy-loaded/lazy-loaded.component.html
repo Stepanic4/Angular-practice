@@ -1,0 +1,19 @@
+Lazy loading works!
+
+<form
+  id="bebebe"
+  [formGroup]="form"
+  (submit)="submit()"
+>
+  <input
+    placeholder="User name"
+    type="text"
+    [formControlName]="'name'"
+    [value]="backup?.name"
+    (input)="onInputHandler('name', form.value.name)"
+  >
+</form>
+
+<div class="mt-5">Backup Name: {{ backup.name }}</div>
+<button class="mt-5 p-4" (click)="reset()">Reset</button>
+<button form="bebebe" class="mt-5 p-4">Submit</button>
