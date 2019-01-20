@@ -1,0 +1,17 @@
+<div class="wrapper">
+  <div class="mb-5 d-flex">
+    <div>Logged User:</div>
+    <div class="ml-2">{{ user?.id }}</div>
+    <div class="ml-2">{{ user?.name }}</div>
+  </div>
+
+  <div
+    class="user d-flex justify-content-between"
+    *ngFor="let user of (users || [])"
+  >
+    <div class="mr-3">{{ user.id }}</div>
+    <div>{{ user.name }}</div>
+  </div>
+
+  <div class="noUsers" *ngIf="!users || !users?.length">No Users :(</div>
+</div>
